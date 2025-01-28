@@ -12,23 +12,22 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-enum GenderEnum{
+
+enum Gender{
   Male
   Female
   Other
 }
-model User{
-  id       String    @unique
-  fullName  String
-  email     String
-  password  String
-  gender GenderEnum
+
+model User {
+  id String @unique @default(uuid())
+  fullName String 
+  email String @unique
+  password String
+  gender Gender
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
   @@map("users")
-
 }
-
-
