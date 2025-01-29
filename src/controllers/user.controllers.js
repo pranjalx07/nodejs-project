@@ -1,34 +1,32 @@
-import { userLoginService ,allUserService,WriteuserService} from "../services/userservices.js";
+import { StatusCodes } from "http-status-codes";
+import { getAllUserService, loginUserService, registerUserService } from "../services/userservices.js";
 
-export const userLoginController=async(req,res,next)=>{
-    console.log(req);
-    try{
-    const data=await userLoginService(req.body);
-    res.status(200).json({data})
-    }catch(error){
-        console.log(error);
-        next(error)
-    }
-}
+export const getAllUserController = async (req, res) => {
+  try {
+    const data = await getAllUserService();
+    res.status(StatusCodes.OK).json(data);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
 
-export const allUserController=async(req,res,next)=>{
-    console.log(req);
-    try{
-    const data=await allUserService(req.body);
-    res.status(200).json({data})
-    }catch(error){
-        console.log(error);
-        next(error)
-    }
-}
+export const registerUserController = async (req, res, next) => {
+  try {
+    const data = await registerUserService(req.body);
+    res.status(StatusCodes.ACCEPTED).json(data);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
 
-export const writeUser=async(req,res,next)=>{
-    console.log(req)
-    try{
-        const data=await WriteuserService(req.body);
-        res.status(200).json({data})
-    }catch(error){
-        console.error(error)
-        next(error)
-    }
-}
+export const userLoginController = async (req, res, next) => {
+  try {
+    const data = await loginUserService(req.body);
+    res.status(StatusCodes.ACCEPTED).json(data);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
